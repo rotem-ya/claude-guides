@@ -10,6 +10,7 @@
 - [`store-release/COWORK_STORE_RELEASE_GUIDE.md`](store-release/COWORK_STORE_RELEASE_GUIDE.md) — הקמת CI להעלאת בילד ל-TestFlight/App Store (Codemagic) ול-Google Play (GitHub Actions), כולל תבנית לעקיפת מגבלות push של סוכן. מקור: `rotem-ya/WhoIsThere`.
 - [`global-account/ACCOUNT_INFO.md`](global-account/ACCOUNT_INFO.md) — מזהים גלובליים שחוזרים בין אפליקציות (Team ID, חשבונות, מוסכמות שמות). **לא מכיל סודות.**
 - [`global-account/SECRETS_POINTER.md`](global-account/SECRETS_POINTER.md) — טבלה של איפה מפתחות/סיסמאות אמיתיים שמורים בפועל, לפי אפליקציה. **מכיל רק מיקומים, אף פעם לא ערכים.**
+- [`writing-style/NO_AI_TELLS_STYLE.md`](writing-style/NO_AI_TELLS_STYLE.md) — כללי כתיבה לכל טקסט גלוי למשתמש (מסכים, פוש, תיאורי חנות וכו'), כולל איסור מוחלט על מקף ארוך (—). לא חל על קוד/קומיטים/תיעוד פנימי.
 
 ## הוספת מדריך חדש
 
@@ -17,4 +18,4 @@
 
 ## `global-account/` — כלל ברזל
 
-מותר: Team ID, שמות חשבונות, כתובות מייל, מוסכמות שמות, "איפה למצוא X". **אסור, לעולם:** מפתח API, תוכן קובץ `.p8`, סיסמת keystore, JSON של service account, או כל ערך שאם ידלוף מאפשר גישה/חתימה בשם החשבון. אם לא בטוחים אם משהו מותר — הוא אסור, שואלים קודם.
+מותר: Team ID, שמות חשבונות, כתובות מייל, מוסכמות שמות, "איפה למצוא X". **אסור, לעולם:** מפתח API, תוכן קובץ `.p8`, סיסמת keystore, JSON של service account, או כל ערך שאם ידלוף מאפשר גישה/חתימה בשם החשבון. אם לא בטוחים אם משהו מותר, ההנחה היא שהוא אסור, שואלים קודם.
