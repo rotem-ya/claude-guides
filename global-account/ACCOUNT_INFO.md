@@ -7,8 +7,11 @@
 ## חשבונות
 - **GitHub:** `rotem-ya` (github.com/rotem-ya)
 - **Google / Firebase — כתובת חשבון הבעלים:** `rot4735@gmail.com`. לא מאומת שזו כתובת הבעלים המדויקת בכל פרויקט Firebase בודד — יש לוודא ב-console.firebase.google.com → Project settings → Users and permissions לפני שמסתמכים על זה במשימת IAM.
-- **Apple Developer Team ID:** מועמד לא-מאומת `3X9M84JZD7` (עלה פעם אחת בבדיקת הגדרת APNs, מעולם לא אושר בכתב). **לוודא** ב-[developer.apple.com/account](https://developer.apple.com/account) → Membership לפני כל שימוש בפועל (secrets, provisioning וכו').
+- **Apple Developer Team ID:** `3X9M84JZD7` (מאומת, מופיע בפועל בפינה העליונה של developer.apple.com תחת "Rotem Yakov"). שם החשבון: Rotem Yakov.
 - **אימייל תמיכה/פרטיות משותף:** `askthekids.app@gmail.com` — בפועל משמש גם את WhoIsThere ולא רק את משפחת "ask the kids" (askthekids-hebrew/english/editor), כנראה תיבת תמיכה כללית לכמה אפליקציות. לפני שמשתמשים בו באפליקציה חדשה — לוודא מול רותם שזו עדיין הכוונה, לא סתם שנשאר מהעתקה.
+
+## עובדות שחוסכות זמן בפעם הבאה
+- **מפתח APNs (Apple Push Notifications) הוא ברמת חשבון המפתחים, לא ברמת אפליקציה בודדת.** "One key is used for all of your apps" (כתוב במפורש במסך היצירה באפל דוולפר). אפל גם מגבילה כמות מפתחות APNs לחשבון. לכן בפרויקט חדש, **קודם לבדוק ב-Certificates, Identifiers & Profiles → Keys אם כבר קיים מפתח APNs פעיל** לפני שיוצרים חדש. אם קיים ויש את קובץ ה-`.p8` השמור, פשוט משתמשים בו מחדש (Key ID + Team ID + אותו p8) בכל פרויקט Firebase נוסף. אם הקובץ אבד, צריך לבטל (Revoke) את המפתח הישן וליצור חדש, אפל לא מאפשרת הורדה חוזרת.
 
 ## מוסכמות
 - **Bundle ID / Application ID:** בדרך כלל `com.rotem.<appname>`. שימו לב: ב-WhoIsThere אנדרואיד ו-iOS לא זהים בטעות היסטורית (`com.whoisthere.app` מול `com.rotem.whoisthere`) — בפרויקט חדש עדיף לשמור על אותו מזהה בשתי הפלטפורמות (ראה `firebase-auth/FIREBASE_AUTH_SETUP_GUIDE.md`).
