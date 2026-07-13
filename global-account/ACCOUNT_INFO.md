@@ -12,6 +12,7 @@
 
 ## עובדות שחוסכות זמן בפעם הבאה
 - **מפתח APNs (Apple Push Notifications) הוא ברמת חשבון המפתחים, לא ברמת אפליקציה בודדת.** "One key is used for all of your apps" (כתוב במפורש במסך היצירה באפל דוולפר). אפל גם מגבילה כמות מפתחות APNs לחשבון. לכן בפרויקט חדש, **קודם לבדוק ב-Certificates, Identifiers & Profiles → Keys אם כבר קיים מפתח APNs פעיל** לפני שיוצרים חדש. אם קיים ויש את קובץ ה-`.p8` השמור, פשוט משתמשים בו מחדש (Key ID + Team ID + אותו p8) בכל פרויקט Firebase נוסף. אם הקובץ אבד, צריך לבטל (Revoke) את המפתח הישן וליצור חדש, אפל לא מאפשרת הורדה חוזרת.
+- **מפתח APNs פעיל נוכחי (Key ID): `5W572K9KWV`** (רוטציה ב-2026-07-13, אחרי שהמפתחות הקודמים נמחקו/בוטלו באפל דוולפר — ראה גם היסטוריית רוטציה קודמת סביב 2026-07-11 ב-WhoIsThere). קובץ ה-`.p8` עצמו **לא** מתועד כאן (סוד — ראה `SECRETS_POINTER.md`); הוא הועלה ל-Firebase Console (Project settings → Cloud Messaging → Apple app configuration) תחת שני הסלוטים Development ו-Production (אותו קובץ p8 לשניהם — אין צורך בשני מפתחות שונים). לפני שמניחים שהמפתח הזה עדיין בתוקף בפרויקט Firebase חדש: לוודא שהוא לא בוטל בינתיים.
 
 ## מוסכמות
 - **Bundle ID / Application ID:** בדרך כלל `com.rotem.<appname>`. שימו לב: ב-WhoIsThere אנדרואיד ו-iOS לא זהים בטעות היסטורית (`com.whoisthere.app` מול `com.rotem.whoisthere`) — בפרויקט חדש עדיף לשמור על אותו מזהה בשתי הפלטפורמות (ראה `firebase-auth/FIREBASE_AUTH_SETUP_GUIDE.md`).
