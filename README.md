@@ -11,6 +11,7 @@
 - [`global-account/ACCOUNT_INFO.md`](global-account/ACCOUNT_INFO.md) — מזהים גלובליים שחוזרים בין אפליקציות (Team ID, חשבונות, מוסכמות שמות). **לא מכיל סודות.**
 - [`global-account/SECRETS_POINTER.md`](global-account/SECRETS_POINTER.md) — טבלה של איפה מפתחות/סיסמאות אמיתיים שמורים בפועל, לפי אפליקציה. **מכיל רק מיקומים, אף פעם לא ערכים.**
 - [`writing-style/NO_AI_TELLS_STYLE.md`](writing-style/NO_AI_TELLS_STYLE.md) — כללי כתיבה לכל טקסט גלוי למשתמש (מסכים, פוש, תיאורי חנות וכו'), כולל איסור מוחלט על מקף ארוך (—). לא חל על קוד/קומיטים/תיעוד פנימי.
+- [`work-habits/WORK_HABITS.md`](work-habits/WORK_HABITS.md) — איך רותם עובד מול קלוד קוד: קצב עבודה (משימה אחת בכל פעם, push רק אחרי כמה משימות), AskUserQuestion לבחירות, תיאום בין סשנים מקבילים, handoff בין ריפואים, הרשאות push/tag/workflow של סוכן. מקור: `rotem-ya/WhoIsThere`.
 
 ## הוספת מדריך חדש
 
