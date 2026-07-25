@@ -7,11 +7,12 @@
 ## מדריכים קיימים
 
 - [`firebase-auth/FIREBASE_AUTH_SETUP_GUIDE.md`](firebase-auth/FIREBASE_AUTH_SETUP_GUIDE.md) — הקמת Firebase Authentication עם Google Sign-In ו-Apple Sign-In בפרויקט Flutter חדש. מקור: `rotem-ya/WhoIsThere`.
-- [`store-release/COWORK_STORE_RELEASE_GUIDE.md`](store-release/COWORK_STORE_RELEASE_GUIDE.md) — הקמת CI להעלאת בילד ל-TestFlight/App Store (Codemagic) ול-Google Play (GitHub Actions), כולל תבנית לעקיפת מגבלות push של סוכן. מקור: `rotem-ya/WhoIsThere`.
+- [`store-release/COWORK_STORE_RELEASE_GUIDE.md`](store-release/COWORK_STORE_RELEASE_GUIDE.md) — הקמת CI להעלאת בילד ל-TestFlight/App Store וכעת גם Google Play דרך Codemagic (AAB+IPA לחנויות), כולל תבנית לעקיפת מגבלות push של סוכן. מקור: `rotem-ya/WhoIsThere`.
+- [`qa-apk-distribution/QA_APK_GITHUB_ACTIONS.md`](qa-apk-distribution/QA_APK_GITHUB_ACTIONS.md) — APK בדיקה (sideload, לא לחנות) דרך GitHub Actions עם קישור הורדה קבוע שמתעדכן אוטומטית בכל push, נפרד לגמרי מה-CI של החנויות. מקור: `rotem-ya/WhoIsThere`.
 - [`global-account/ACCOUNT_INFO.md`](global-account/ACCOUNT_INFO.md) — מזהים גלובליים שחוזרים בין אפליקציות (Team ID, חשבונות, מוסכמות שמות). **לא מכיל סודות.**
 - [`global-account/SECRETS_POINTER.md`](global-account/SECRETS_POINTER.md) — טבלה של איפה מפתחות/סיסמאות אמיתיים שמורים בפועל, לפי אפליקציה. **מכיל רק מיקומים, אף פעם לא ערכים.**
 - [`writing-style/NO_AI_TELLS_STYLE.md`](writing-style/NO_AI_TELLS_STYLE.md) — כללי כתיבה לכל טקסט גלוי למשתמש (מסכים, פוש, תיאורי חנות וכו'), כולל איסור מוחלט על מקף ארוך (—). לא חל על קוד/קומיטים/תיעוד פנימי.
-- [`work-habits/WORK_HABITS.md`](work-habits/WORK_HABITS.md) — איך רותם עובד מול קלוד קוד: קצב עבודה (משימה אחת בכל פעם, push רק אחרי כמה משימות), AskUserQuestion לבחירות, תיאום בין סשנים מקבילים, handoff בין ריפואים, הרשאות push/tag/workflow של סוכן. מקור: `rotem-ya/WhoIsThere`.
+- [`work-habits/WORK_HABITS.md`](work-habits/WORK_HABITS.md) — איך רותם עובד מול קלוד קוד: קצב עבודה (משימה אחת בכל פעם, push רק אחרי כמה משימות), AskUserQuestion לבחירות, תיאום בין סשנים מקבילים, handoff בין ריפואים, הרשאות push/tag/workflow של סוכן, עבודה מ-Termux על אנדרואיד. מקור: `rotem-ya/WhoIsThere`.
 
 ## הוספת מדריך חדש
 

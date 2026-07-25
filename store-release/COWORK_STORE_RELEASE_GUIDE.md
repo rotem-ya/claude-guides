@@ -4,6 +4,13 @@
 
 **עקרון-על:** גם iOS וגם Android נבנים ונחתמים אוטומטית ב-CI. cowork **לא** יכול ללחוץ בממשק Codemagic/Play Console בשם בעל הפרויקט — אבל יכול להפעיל בנייה (דרך push לגיט) ולהכין את כל הטקסטים/הנכסים כך שנשארת לבעל הפרויקט רק לחיצת Submit הסופית.
 
+**⚠️ עדכון כיוון (2026-07): חלוקת CI לפי סוג ארטיפקט, לא לפי פלטפורמה.** מכאן ואילך:
+- **APK לבדיקה (sideload, לא לחנות)** — נשאר ב-**GitHub Actions** (`build-apk.yml`). ראה מדריך ייעודי: `qa-apk-distribution/QA_APK_GITHUB_ACTIONS.md`.
+- **AAB לחנות (Google Play)** — עובר ל-**Codemagic**, כמו iOS, במקום GitHub Actions.
+- **IPA לחנות (TestFlight/App Store)** — כבר ב-Codemagic היום, לא משתנה.
+
+כלומר: אם צריך להחליט "האם זה הולך ל-Actions או ל-Codemagic", השאלה היא לא "איזו פלטפורמה" אלא **"זה בילד-בדיקה שיורד/מותקן ישירות, או בילד שעולה לחנות"**. ⚠️ **חשוב:** נכון לרגע כתיבת השורות האלה, ב-`rotem-ya/WhoIsThere` בפועל **עדיין** ה-AAB בנוי ב-GitHub Actions (`build-aab.yml`, מתועד בחלק 2 למטה) — המעבר בפועל ל-Codemagic טרם בוצע שם. חלק 2 נשאר במדריך כי מנגנון החתימה/keystore בו רלוונטי גם כתשתית לבניית ה-workflow ב-Codemagic; מי שמקים את זה לראשונה בפרויקט חדש, שיקים ישר בכיוון Codemagic ולא ישכפל את הגרסה הישנה.
+
 ---
 
 ## חלק 0 — הקמה חד-פעמית (לפני הבילד הראשון בפרויקט חדש)
@@ -128,6 +135,17 @@ jobs:
 
 ⚠️ **אזהרה מניסיון בפועל:** ב-WhoIsThere, בגלל שההדבקה של הסוד דרך מובייל נכשלה בזמן אמת, המפתח **הוטמע ישירות** (base64 בתוך קובץ ה-workflow) כפתרון זמני להשקה — וזה נשאר כחוב אבטחה לא-מטופל בריפו ציבורי. **אל תשכפלו את זה בפרויקט חדש.** אם הדבקת secret נכשלת, זו בעיה לפתור (למשל secret קצר מדי/רווחים מיותרים), לא סיבה להטמיע מפתח חתימה בקוד.
 
+### 0ו. Android AAB דרך Codemagic (הכיוון החדש — **טרם נבנה ואומת בפועל בשום פרויקט**)
+
+⚠️ בשונה משאר המדריך הזה, הסעיף הזה **לא** מבוסס על קוד עובד שנבדק — הוא תיאור הכיוון המתוכנן, לשימוש כשמישהו בונה את זה לראשונה. לעדכן את הסעיף (ולהסיר את האזהרה) ברגע שקיים workflow אמיתי שאומת מול בילד שעלה בהצלחה ל-Play.
+
+הרעיון: להוסיף ל-`codemagic.yaml` workflow שני, לצד `ios-testflight` הקיים, בשם למשל `android-playstore`:
+- טריגר: תג `aab-v*` (מקביל ל-`ios-v*` של ה-iOS, ראה חלק 1 למטה), או Start build ידני ב-Codemagic UI.
+- חתימה: **לא** GitHub Secrets — Codemagic environment variable group (מוצפן בממשק Codemagic, לא בגיט בכלל), עם אותם 4 ערכים שמתועדים למעלה (`UPLOAD_KEYSTORE_BASE64`/`UPLOAD_KEYSTORE_PASSWORD`/`UPLOAD_KEY_ALIAS`/`UPLOAD_KEY_PASSWORD`) — אותה לוגיקת `signingConfigs` ב-`android/app/build.gradle` ממשיכה לעבוד, רק מקור הסודות שונה.
+- build step: `flutter build appbundle --release --build-name=... --build-number=$PROJECT_BUILD_NUMBER` (כמו ה-IPA, לא GitHub Actions run number).
+- ⚠️ שווה לבדוק אם Codemagic יכול גם להעלות ישירות ל-Play Console (יש להם אינטגרציית Google Play publishing מובנית, דומה ל-`submit_to_testflight` באפל) — אם כן, זה עשוי לחסוך גם את שלב "הורד והעלה ידנית" בחלק 2 למטה, בדיוק כמו שקורה כבר עם iOS.
+- מה שכן מועתק ישירות מהניסיון הקיים (חלק 2 למטה, עדיין תקף): ההבחנה בין upload key ל-app signing key של גוגל, ואזהרת ה-SHA-1.
+
 ---
 
 ## חלק 1 — iOS: הפעלת בנייה חדשה + TestFlight
@@ -149,7 +167,7 @@ git push origin ios-v1
 
 ---
 
-## חלק 2 — Android: הפעלת בנייה + העלאה ל-Play
+## חלק 2 — Android: הפעלת בנייה + העלאה ל-Play (דרך GitHub Actions — ראה 0ו למעלה על המעבר ל-Codemagic)
 
 **הפעלת הבנייה** — שתי דרכים:
 - דחיפה ל-marker file (`.github/aab-release.txt` — כל תוכן, אפילו רק תאריך, זה רק trigger):
