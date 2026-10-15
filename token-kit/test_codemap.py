@@ -132,4 +132,24 @@ def test_install_is_idempotent(tmp_path):
     settings = json.loads((r / ".claude" / "settings.json").read_text())
     assert len(settings["hooks"]["SessionStart"]) == 1
     assert (r / ".gitignore").read_text().count("docs/codemap") == 1
-    assert (r / "tools" / "codemap.py").exists() and (r / ".claude" / "hooks" / "session-start.sh").exists()
+    assert (r / ".claude" / "hooks" / "session-start.sh").exists()
+    skill = r / ".claude" / "skills" / "token-kit"
+    assert (skill / "SKILL.md").read_text().startswith("---\nname: token-kit\n")
+    assert (skill / "codemap.py").read_text() == (KIT / "codemap.py").read_text()
+    agents = (r / "AGENTS.md").read_text()
+    assert agents.count("token-kit:start") == 1 and "tools/codemap.py" in agents
+    # the tools/ entry point runs the skill's copy
+    out = subprocess.run([sys.executable, "tools/codemap.py", "find", "^total$"], cwd=r, capture_output=True, text=True, check=True).stdout
+    assert "server/app/services/billing.py:4-7" in out
+    assert not (r / "tools" / "codemap_ts.cjs").exists()
+
+
+def test_hook_copies_the_skill_to_the_user_level(tmp_path):
+    r = make_repo(tmp_path)
+    subprocess.run([sys.executable, str(KIT / "install.py"), str(r)], check=True, capture_output=True)
+    home = tmp_path / "home"
+    env = {**os.environ, "HOME": str(home), "CLAUDE_PROJECT_DIR": str(r), "CLAUDE_CODE_REMOTE": ""}
+    res = subprocess.run([str(r / ".claude" / "hooks" / "session-start.sh")], env=env, capture_output=True, text=True)
+    assert res.returncode == 0 and res.stdout == ""  # a local session: silent, no dependency installs
+    assert (home / ".claude" / "skills" / "token-kit" / "SKILL.md").exists()
+    assert (r / "docs" / "codemap" / "INDEX.md").exists()

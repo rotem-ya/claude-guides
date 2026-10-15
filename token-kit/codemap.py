@@ -25,7 +25,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-VERSION = "1.0"
+VERSION = "1.1"
 ROOT = Path(subprocess.run(["git", "rev-parse", "--show-toplevel"], capture_output=True, text=True).stdout.strip() or ".").resolve()
 OUT = Path(os.environ.get("CODEMAP_OUT") or ROOT / "docs" / "codemap").resolve()
 HERE = Path(__file__).resolve().parent

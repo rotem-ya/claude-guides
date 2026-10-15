@@ -6,7 +6,7 @@
 
 ## מדריכים קיימים
 
-- [`token-kit/`](token-kit/README.md) — **ערכה שמותקנת בכל פרויקט, חדש וקיים**: מפת קוד אוטומטית (כל פונקציה ומחלקה עם טווח השורות שלה), hook שמכין את סשן הענן לפני ההודעה הראשונה, וכללי עבודה שחוסכים טוקנים בלי לוותר על איכות. בפרויקט חדש: "תתקין token-kit מ-claude-guides". מקור: `rotem-ya/Mida`, אוקטובר 2026.
+- [`token-kit/`](token-kit/README.md) — **Skill + ערכה, שיטת העבודה בכל פרויקט, חדש וקיים**: מפת קוד אוטומטית (כל פונקציה ומחלקה עם טווח השורות שלה), hook שמכין את סשן הענן לפני ההודעה הראשונה, וכללי עבודה שחוסכים טוקנים בלי לוותר על איכות. ל-claude.ai: להעלות את `token-kit/dist/token-kit.zip` בכל חשבון (Customize ← Skills). בפרויקט חדש: "תתקין token-kit מ-claude-guides". מקור: `rotem-ya/Mida`, אוקטובר 2026.
 
 - [`firebase-auth/FIREBASE_AUTH_SETUP_GUIDE.md`](firebase-auth/FIREBASE_AUTH_SETUP_GUIDE.md) — הקמת Firebase Authentication עם Google Sign-In ו-Apple Sign-In בפרויקט Flutter חדש. מקור: `rotem-ya/WhoIsThere`.
 - [`store-release/COWORK_STORE_RELEASE_GUIDE.md`](store-release/COWORK_STORE_RELEASE_GUIDE.md) — הקמת CI להעלאת בילד ל-TestFlight/App Store וכעת גם Google Play דרך Codemagic (AAB+IPA לחנויות), כולל תבנית לעקיפת מגבלות push של סוכן. מקור: `rotem-ya/WhoIsThere`.
